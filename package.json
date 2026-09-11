@@ -1,0 +1,7 @@
+{
+  "name":"sidhh-listener",
+  "version":"1.0.0",
+  "private":true,
+  "scripts":{"start":"node server.js"},
+  "dependencies":{"express":"^5.1.0","razorpay":"^2.9.6","dotenv":"^17.2.1"}
+}

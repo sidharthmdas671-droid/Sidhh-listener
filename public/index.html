@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sidhh Listener</title><script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f8f6f3;color:#263f40}header{padding:18px 7%;border-bottom:1px solid #ddd;background:#fff}.logo{font-weight:900;font-size:25px}.logo span{color:#b46b61}.hero,.section{max-width:1050px;margin:auto;padding:65px 22px}.hero{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}h1{font-size:clamp(42px,6vw,72px);line-height:1;margin:15px 0}h2{font-size:34px}.card,form{background:#fff;padding:28px;border-radius:24px;box-shadow:0 12px 40px #263f4012}.prices{display:grid;grid-template-columns:1fr 1fr;gap:18px}.price{padding:25px;border:1px solid #ddd;border-radius:18px}.amount{font-size:40px;font-weight:900}.btn{background:#314b4b;color:white;border:0;border-radius:12px;padding:14px 20px;font-weight:800;cursor:pointer}.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{font-weight:bold;display:block;margin:13px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;box-sizing:border-box;font:inherit}textarea{min-height:100px}.note{background:#f1efeb;padding:14px;border-radius:10px;margin:18px 0;font-size:13px}@media(max-width:700px){.hero,.prices,.row{grid-template-columns:1fr}.hero{padding-top:35px}}
+</style></head>
+<body>
+<header><div class="logo">Sidhh <span>Listener</span></div></header>
+<section class="hero"><div><small>LISTEN • UNDERSTAND • BE HEARD</small><h1>A safe space to be heard.</h1><p>Share what is on your mind with a calm, non-judgmental listener.</p><a class="btn" href="#book">Book a session</a></div><div class="card"><div style="font-size:90px;text-align:center">♡</div><h2 style="text-align:center">You don't have to keep everything inside.</h2></div></section>
+<section class="section"><h2>Sessions</h2><div class="prices"><div class="price"><h3>1 Hour</h3><div class="amount">₹200</div><p>One focused listening session.</p><button class="btn" onclick="plan('1 Hour — ₹200')">Choose</button></div><div class="price"><h3>3 Hours</h3><div class="amount">₹500</div><p>A longer, unhurried conversation.</p><button class="btn" onclick="plan('3 Hours — ₹500')">Choose</button></div></div></section>
+<section class="section" id="book"><h2>Book & Pay</h2><form id="f">
+<div class="row"><div><label>Name *</label><input id="name" required></div><div><label>Age *</label><input id="age" type="number" min="18" required></div></div>
+<div class="row"><div><label>Gender *</label><select id="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Non-binary</option><option>Prefer not to say</option></select></div><div><label>Place *</label><input id="place" required></div></div>
+<div class="row"><div><label>Phone / WhatsApp *</label><input id="phone" required></div><div><label>Email</label><input id="email" type="email"></div></div>
+<label>Session *</label><select id="plan" required><option value="">Choose</option><option>1 Hour — ₹200</option><option>3 Hours — ₹500</option></select>
+<label>Preferred date & time *</label><input id="datetime" type="datetime-local" required>
+<label>Optional message</label><textarea id="message" placeholder="Anything you would like your listener to know?"></textarea>
+<div class="note"><b>Important:</b> Sidhh Listener is a listening/support service, not medical or psychological treatment. For immediate danger or an emergency, contact local emergency services or a qualified professional.</div>
+<button class="btn" type="submit">Proceed to secure payment</button><p id="status"></p>
+</form></section>
+<script>
+function plan(v){document.getElementById('plan').value=v;location.hash='book'}
+const val=id=>document.getElementById(id).value;
+document.getElementById('f').onsubmit=async e=>{
+ e.preventDefault(); const s=document.getElementById('status');s.textContent='Creating secure payment…';
+ const data={name:val('name'),age:val('age'),gender:val('gender'),place:val('place'),phone:val('phone'),email:val('email'),plan:val('plan'),datetime:val('datetime'),message:val('message')};
+ const r=await fetch('/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); const j=await r.json();
+ if(!r.ok){s.textContent=j.error;return}
+ const rz=new Razorpay({key:j.key,amount:j.amount,currency:j.currency,name:'Sidhh Listener',description:data.plan,order_id:j.orderId,prefill:{name:data.name,email:data.email,contact:data.phone},theme:{color:'#314b4b'},
+ handler:async resp=>{const vr=await fetch('/api/verify-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(resp)});const v=await vr.json();s.textContent=v.ok?'Payment successful. Your booking is confirmed.':'Payment verification failed.'}});
+ rz.open();
+};
+</script></body></html>
