@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Booking Confirmed — Sidhh Listener</title>
+<style>
+  :root{--dark:#314b4b;--accent:#b46b61;--bg:#f8f6f3;--text:#263f40;--muted:#6b7a7a}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;align-items:center;justify-content:center;padding:20px}
+  .card{background:#fff;max-width:440px;width:100%;padding:36px 30px;border-radius:22px;box-shadow:0 12px 40px rgba(38,63,64,.1);text-align:center}
+  .tick{font-size:56px;color:#2e7d32}
+  h1{font-size:22px;margin:10px 0 20px}
+  table{width:100%;border-collapse:collapse;text-align:left;font-size:14px;margin-top:10px}
+  td{padding:8px 0;border-bottom:1px solid #eee}
+  td:first-child{color:var(--muted)}
+  td:last-child{font-weight:700;text-align:right}
+  a.btn{display:inline-block;margin-top:24px;background:var(--dark);color:#fff;padding:12px 22px;border-radius:12px;text-decoration:none;font-weight:800}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="tick">✓</div>
+  <h1>Booking Confirmed</h1>
+  <table id="t"><tr><td colspan="2">Loading booking details…</td></tr></table>
+  <a class="btn" href="/">Back to home</a>
+</div>
+<script>
+const params = new URLSearchParams(location.search);
+const orderId = params.get('order_id');
+if(orderId){
+  fetch('/api/booking/' + orderId).then(r=>r.json()).then(b=>{
+    if(b.error){ document.getElementById('t').innerHTML = '<tr><td colspan="2">Could not load booking details.</td></tr>'; return; }
+    document.getElementById('t').innerHTML = `
+      <tr><td>Booking ID</td><td>${b.id}</td></tr>
+      <tr><td>Session</td><td>${b.plan}</td></tr>
+      <tr><td>Date</td><td>${b.date}</td></tr>
+      <tr><td>Time</td><td>${b.time}</td></tr>
+      <tr><td>Payment</td><td>${b.status === 'paid' ? 'Successful' : b.status}</td></tr>`;
+  });
+} else {
+  document.getElementById('t').innerHTML = '<tr><td colspan="2">No booking reference found.</td></tr>';
+}
+</script>
+</body>
+</html>
