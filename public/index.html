@@ -1,33 +1,249 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sidhh Listener</title><script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sidhh Listener — A Safe Space to Be Heard</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f8f6f3;color:#263f40}header{padding:18px 7%;border-bottom:1px solid #ddd;background:#fff}.logo{font-weight:900;font-size:25px}.logo span{color:#b46b61}.hero,.section{max-width:1050px;margin:auto;padding:65px 22px}.hero{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}h1{font-size:clamp(42px,6vw,72px);line-height:1;margin:15px 0}h2{font-size:34px}.card,form{background:#fff;padding:28px;border-radius:24px;box-shadow:0 12px 40px #263f4012}.prices{display:grid;grid-template-columns:1fr 1fr;gap:18px}.price{padding:25px;border:1px solid #ddd;border-radius:18px}.amount{font-size:40px;font-weight:900}.btn{background:#314b4b;color:white;border:0;border-radius:12px;padding:14px 20px;font-weight:800;cursor:pointer}.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{font-weight:bold;display:block;margin:13px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;box-sizing:border-box;font:inherit}textarea{min-height:100px}.note{background:#f1efeb;padding:14px;border-radius:10px;margin:18px 0;font-size:13px}@media(max-width:700px){.hero,.prices,.row{grid-template-columns:1fr}.hero{padding-top:35px}}
-</style></head>
+  :root{--dark:#314b4b;--accent:#b46b61;--bg:#f8f6f3;--text:#263f40;--muted:#6b7a7a}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+  a{color:inherit}
+  header{padding:16px 6%;border-bottom:1px solid #e4e0da;background:#fff;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-weight:900;font-size:22px}
+  .logo span{color:var(--accent)}
+  nav a{margin-left:18px;font-size:14px;text-decoration:none;font-weight:600;color:var(--text)}
+  .wrap{max-width:1080px;margin:auto;padding:60px 22px}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:50px}
+  .kicker{letter-spacing:2px;font-size:12px;font-weight:800;color:var(--accent)}
+  h1{font-size:clamp(34px,5.5vw,58px);line-height:1.08;margin:14px 0}
+  .lead{font-size:17px;color:var(--muted);max-width:480px}
+  .btn{display:inline-block;background:var(--dark);color:#fff;border:0;border-radius:12px;padding:14px 24px;font-weight:800;cursor:pointer;text-decoration:none;font-size:15px}
+  .btn.outline{background:#fff;border:2px solid var(--dark);color:var(--dark)}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .card{background:#fff;padding:28px;border-radius:22px;box-shadow:0 12px 40px rgba(38,63,64,.08)}
+  h2{font-size:30px;margin-bottom:6px}
+  .sub{color:var(--muted);margin-bottom:30px;max-width:600px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .step{background:#fff;border-radius:18px;padding:24px;box-shadow:0 8px 24px rgba(38,63,64,.06)}
+  .step .num{width:34px;height:34px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:12px}
+  .why-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid #eee}
+  .why-item:last-child{border-bottom:0}
+  .why-item .ico{font-size:22px}
+  .prices{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .price{padding:26px;border:1px solid #e4e0da;border-radius:18px;background:#fff}
+  .price.featured{border:2px solid var(--dark)}
+  .amount{font-size:38px;font-weight:900}
+  form label{font-weight:700;display:block;margin:14px 0 6px;font-size:14px}
+  input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;box-sizing:border-box;font:inherit}
+  textarea{min-height:90px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .note{background:#f1efeb;padding:14px;border-radius:10px;margin:18px 0;font-size:13px;color:var(--muted)}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:18px 0;font-size:13px;color:var(--muted)}
+  .consent input{width:auto;margin-top:3px}
+  #status{font-size:14px;font-weight:700;min-height:20px}
+  footer{padding:40px 6%;background:#fff;border-top:1px solid #eee;color:var(--muted);font-size:13px}
+  footer a{text-decoration:underline;margin-right:14px}
+  .wa-btn{position:fixed;right:20px;bottom:20px;background:#25D366;color:#fff;padding:14px 18px;border-radius:30px;font-weight:800;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.2);display:none;align-items:center;gap:8px;z-index:20}
+  @media(max-width:760px){
+    .hero,.grid3,.prices,.row{grid-template-columns:1fr}
+    nav{display:none}
+    .wrap{padding:40px 18px}
+  }
+</style>
+</head>
 <body>
-<header><div class="logo">Sidhh <span>Listener</span></div></header>
-<section class="hero"><div><small>LISTEN • UNDERSTAND • BE HEARD</small><h1>A safe space to be heard.</h1><p>Share what is on your mind with a calm, non-judgmental listener.</p><a class="btn" href="#book">Book a session</a></div><div class="card"><div style="font-size:90px;text-align:center">♡</div><h2 style="text-align:center">You don't have to keep everything inside.</h2></div></section>
-<section class="section"><h2>Sessions</h2><div class="prices"><div class="price"><h3>1 Hour</h3><div class="amount">₹200</div><p>One focused listening session.</p><button class="btn" onclick="plan('1 Hour — ₹200')">Choose</button></div><div class="price"><h3>3 Hours</h3><div class="amount">₹500</div><p>A longer, unhurried conversation.</p><button class="btn" onclick="plan('3 Hours — ₹500')">Choose</button></div></div></section>
-<section class="section" id="book"><h2>Book & Pay</h2><form id="f">
-<div class="row"><div><label>Name *</label><input id="name" required></div><div><label>Age *</label><input id="age" type="number" min="18" required></div></div>
-<div class="row"><div><label>Gender *</label><select id="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Non-binary</option><option>Prefer not to say</option></select></div><div><label>Place *</label><input id="place" required></div></div>
-<div class="row"><div><label>Phone / WhatsApp *</label><input id="phone" required></div><div><label>Email</label><input id="email" type="email"></div></div>
-<label>Session *</label><select id="plan" required><option value="">Choose</option><option>1 Hour — ₹200</option><option>3 Hours — ₹500</option></select>
-<label>Preferred date & time *</label><input id="datetime" type="datetime-local" required>
-<label>Optional message</label><textarea id="message" placeholder="Anything you would like your listener to know?"></textarea>
-<div class="note"><b>Important:</b> Sidhh Listener is a listening/support service, not medical or psychological treatment. For immediate danger or an emergency, contact local emergency services or a qualified professional.</div>
-<button class="btn" type="submit">Proceed to secure payment</button><p id="status"></p>
-</form></section>
+
+<header>
+  <div class="logo">Sidhh <span>Listener</span></div>
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#why">Why us</a>
+    <a href="#about">About</a>
+    <a href="#book">Book a session</a>
+  </nav>
+</header>
+
+<section class="wrap hero">
+  <div>
+    <div class="kicker">LISTEN • UNDERSTAND • BE HEARD</div>
+    <h1>A safe space to be heard.</h1>
+    <p class="lead">Sidhh Listener connects you with a calm, non-judgmental listener to talk through whatever is on your mind — stress, overthinking, loneliness, or just a hard day.</p>
+    <div class="btn-row">
+      <a class="btn" href="#book">Book a Session</a>
+      <a class="btn outline" href="#how">How it works</a>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-size:80px;text-align:center">♡</div>
+    <h2 style="text-align:center;font-size:22px">You don't have to keep everything inside.</h2>
+    <p style="text-align:center;color:var(--muted);font-size:14px">Private, judgment-free conversations — on your schedule.</p>
+  </div>
+</section>
+
+<section class="wrap" id="how">
+  <h2>How it works</h2>
+  <p class="sub">Booking a session takes less than two minutes.</p>
+  <div class="grid3">
+    <div class="step"><div class="num">1</div><b>Choose a session</b><p style="color:var(--muted);font-size:14px">Pick a 1-hour or 3-hour listening session based on how much time you need.</p></div>
+    <div class="step"><div class="num">2</div><b>Pick date & time</b><p style="color:var(--muted);font-size:14px">Select an available slot that suits your schedule — no double-booking, ever.</p></div>
+    <div class="step"><div class="num">3</div><b>Pay & confirm</b><p style="color:var(--muted);font-size:14px">Secure payment via Razorpay. You'll instantly get a confirmed booking ID.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="why">
+  <h2>Why choose Sidhh Listener</h2>
+  <p class="sub">A calm, dependable space — built around you.</p>
+  <div class="card">
+    <div class="why-item"><div class="ico">🤍</div><div><b>Non-judgmental listening</b><br><span style="color:var(--muted);font-size:14px">No advice you didn't ask for — just genuine, focused attention.</span></div></div>
+    <div class="why-item"><div class="ico">🔒</div><div><b>Private & confidential</b><br><span style="color:var(--muted);font-size:14px">Your details and conversations are kept strictly confidential.</span></div></div>
+    <div class="why-item"><div class="ico">🕒</div><div><b>Flexible scheduling</b><br><span style="color:var(--muted);font-size:14px">Book a slot that works for you, any day of the week.</span></div></div>
+    <div class="why-item"><div class="ico">💬</div><div><b>Simple, transparent pricing</b><br><span style="color:var(--muted);font-size:14px">Flat ₹200 / ₹500 pricing — no hidden charges.</span></div></div>
+  </div>
+</section>
+
+<section class="wrap" id="about">
+  <h2>About Sidhh Listener</h2>
+  <p class="sub" style="max-width:720px">
+    Sidhh Listener was created around one simple idea: everyone deserves someone who will genuinely listen.
+    We are a listening and emotional support service — a place to think out loud, process your day, or simply
+    feel less alone. Our listeners are trained to listen with patience and without judgment.
+  </p>
+  <div class="note" style="max-width:720px">
+    <b>Important:</b> Sidhh Listener is a listening/support service. It is <b>not</b> psychological counseling,
+    therapy, or medical treatment, and our listeners are not licensed medical or mental health professionals.
+    If you are in crisis, experiencing a medical emergency, or thinking of harming yourself, please contact
+    local emergency services or a qualified mental health professional immediately.
+  </div>
+</section>
+
+<section class="wrap" id="pricing">
+  <h2>Sessions</h2>
+  <div class="prices">
+    <div class="price"><h3>1 Hour</h3><div class="amount">₹200</div><p style="color:var(--muted);font-size:14px">One focused listening session.</p><button class="btn" onclick="choosePlan('1 Hour — ₹200')">Choose</button></div>
+    <div class="price featured"><h3>3 Hours</h3><div class="amount">₹500</div><p style="color:var(--muted);font-size:14px">A longer, unhurried conversation.</p><button class="btn" onclick="choosePlan('3 Hours — ₹500')">Choose</button></div>
+  </div>
+</section>
+
+<section class="wrap" id="book">
+  <h2>Book & Pay</h2>
+  <p class="sub">All fields marked * are required.</p>
+  <form id="f" class="card">
+    <div class="row">
+      <div><label>Name *</label><input id="name" required></div>
+      <div><label>Age *</label><input id="age" type="number" min="18" required></div>
+    </div>
+    <div class="row">
+      <div><label>Gender *</label><select id="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Non-binary</option><option>Prefer not to say</option></select></div>
+      <div><label>Place *</label><input id="place" required></div>
+    </div>
+    <div class="row">
+      <div><label>Phone / WhatsApp *</label><input id="phone" required></div>
+      <div><label>Email (for confirmation)</label><input id="email" type="email"></div>
+    </div>
+    <label>Session *</label>
+    <select id="plan" required onchange="loadSlots()"><option value="">Choose</option><option>1 Hour — ₹200</option><option>3 Hours — ₹500</option></select>
+
+    <div class="row">
+      <div><label>Date *</label><input id="date" type="date" required onchange="loadSlots()"></div>
+      <div><label>Available time slots *</label><select id="time" required><option value="">Select date & session first</option></select></div>
+    </div>
+
+    <label>Optional message</label>
+    <textarea id="message" placeholder="Anything you would like your listener to know?"></textarea>
+
+    <div class="consent">
+      <input type="checkbox" id="consent" required>
+      <label for="consent" style="margin:0;font-weight:400">
+        I agree to the <a href="/terms.html" target="_blank">Terms & Conditions</a>,
+        <a href="/privacy.html" target="_blank">Privacy Policy</a> and
+        <a href="/cancellation.html" target="_blank">Cancellation & Refund Policy</a>.
+        I understand this is a listening/support service and not psychological or medical treatment.
+      </label>
+    </div>
+
+    <div class="note"><b>Note:</b> For any emergency or immediate danger, please contact local emergency services or a qualified professional — not this service.</div>
+
+    <button class="btn" type="submit">Proceed to secure payment</button>
+    <p id="status"></p>
+  </form>
+</section>
+
+<footer>
+  <div>© <span id="year"></span> Sidhh Listener. All rights reserved.</div>
+  <div style="margin-top:10px">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms & Conditions</a>
+    <a href="/cancellation.html">Cancellation & Refund Policy</a>
+  </div>
+</footer>
+
+<a class="wa-btn" id="waBtn" target="_blank">💬 Chat on WhatsApp</a>
+
 <script>
-function plan(v){document.getElementById('plan').value=v;location.hash='book'}
-const val=id=>document.getElementById(id).value;
-document.getElementById('f').onsubmit=async e=>{
- e.preventDefault(); const s=document.getElementById('status');s.textContent='Creating secure payment…';
- const data={name:val('name'),age:val('age'),gender:val('gender'),place:val('place'),phone:val('phone'),email:val('email'),plan:val('plan'),datetime:val('datetime'),message:val('message')};
- const r=await fetch('/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); const j=await r.json();
- if(!r.ok){s.textContent=j.error;return}
- const rz=new Razorpay({key:j.key,amount:j.amount,currency:j.currency,name:'Sidhh Listener',description:data.plan,order_id:j.orderId,prefill:{name:data.name,email:data.email,contact:data.phone},theme:{color:'#314b4b'},
- handler:async resp=>{const vr=await fetch('/api/verify-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(resp)});const v=await vr.json();s.textContent=v.ok?'Payment successful. Your booking is confirmed.':'Payment verification failed.'}});
- rz.open();
+document.getElementById('year').textContent = new Date().getFullYear();
+const val = id => document.getElementById(id).value;
+
+// min date = today
+document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+function choosePlan(v){ document.getElementById('plan').value = v; loadSlots(); location.hash = 'book'; }
+
+async function loadSlots(){
+  const date = val('date'), plan = val('plan');
+  const sel = document.getElementById('time');
+  if(!date || !plan){ sel.innerHTML = '<option value="">Select date & session first</option>'; return; }
+  sel.innerHTML = '<option value="">Loading...</option>';
+  const r = await fetch(`/api/slots?date=${date}&plan=${encodeURIComponent(plan)}`);
+  const j = await r.json();
+  if(!j.slots || !j.slots.length){ sel.innerHTML = '<option value="">No slots available this day</option>'; return; }
+  sel.innerHTML = '<option value="">Select a time</option>' + j.slots.map(s => `<option>${s}</option>`).join('');
+}
+
+document.getElementById('f').onsubmit = async e => {
+  e.preventDefault();
+  const s = document.getElementById('status');
+  s.style.color = '#314b4b';
+  s.textContent = 'Creating secure payment…';
+  const data = {
+    name: val('name'), age: val('age'), gender: val('gender'), place: val('place'),
+    phone: val('phone'), email: val('email'), plan: val('plan'),
+    date: val('date'), time: val('time'), message: val('message'),
+    consent: document.getElementById('consent').checked
+  };
+  const r = await fetch('/api/create-order', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+  const j = await r.json();
+  if(!r.ok){ s.style.color = '#b3261e'; s.textContent = j.error; return; }
+
+  const rz = new Razorpay({
+    key: j.key, amount: j.amount, currency: j.currency,
+    name: 'Sidhh Listener', description: data.plan, order_id: j.orderId,
+    prefill: { name: data.name, email: data.email, contact: data.phone },
+    theme: { color: '#314b4b' },
+    handler: async resp => {
+      const vr = await fetch('/api/verify-payment', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(resp) });
+      const v = await vr.json();
+      if(v.ok){
+        window.location.href = `/success.html?order_id=${resp.razorpay_order_id}`;
+      } else {
+        window.location.href = `/failed.html`;
+      }
+    },
+    modal: { ondismiss: () => { s.textContent = 'Payment window closed.'; } }
+  });
+  rz.on('payment.failed', () => { window.location.href = '/failed.html'; });
+  rz.open();
 };
-</script></body></html>
+
+// WhatsApp button
+fetch('/api/config').then(r=>r.json()).then(c=>{
+  if(c.whatsapp){
+    const btn = document.getElementById('waBtn');
+    btn.href = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent('Hi, I have a question about Sidhh Listener.')}`;
+    btn.style.display = 'flex';
+  }
+});
+</script>
+</body>
+</html>
